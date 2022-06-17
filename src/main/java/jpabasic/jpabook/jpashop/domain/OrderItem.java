@@ -2,24 +2,24 @@ package jpabasic.jpabook.jpashop.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "ORDER_ITEM")
 public class OrderItem {
 
     @Id @GeneratedValue
-    @Column(name = "ORDER_ITEM_ID")
+    @Column(name = "order_item_id")
     private Long id;
 
-    @Column(name = "ORDER_ID")
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    @Column(name = "ITEM_ID")
-    private Long itemId;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     private int orderPrice;
     private int count;

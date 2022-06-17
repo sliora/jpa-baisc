@@ -3,6 +3,8 @@ package jpabasic.jpabook.jpashop.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -12,10 +14,11 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    private String name;
+    private String city;
+    private String street;
+    private String zipcode;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 }

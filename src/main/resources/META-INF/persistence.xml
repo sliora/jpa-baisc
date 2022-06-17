@@ -7,7 +7,13 @@
             jpabasic.jpabook.jpashop.domain.Member
         </class>
         <class>
-            jpabasic.jpabook.jpashop.domain.Team
+            jpabasic.jpabook.jpashop.domain.Order
+        </class>
+        <class>
+            jpabasic.jpabook.jpashop.domain.OrderItem
+        </class>
+        <class>
+            jpabasic.jpabook.jpashop.domain.Item
         </class>
         <properties>
             <!-- 필수 속성 -->
@@ -21,7 +27,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 </persistence>

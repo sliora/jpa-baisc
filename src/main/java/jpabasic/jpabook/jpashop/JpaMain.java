@@ -1,8 +1,7 @@
 package jpabasic.jpabook.jpashop;
 
-import jpabasic.jpabook.jpashop.domain.Member;
-import jpabasic.jpabook.jpashop.domain.Order;
-import jpabasic.jpabook.jpashop.domain.Team;
+import jpabasic.jpabook.jpashop.domain.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -25,21 +24,29 @@ public class JpaMain {
 
         try {
 
-            Team team = new Team();
-            team.setName("TeamA");
-
-            em.persist(team);
-
+            //멤버 추가
             Member member = new Member();
-            member.setUsername("member1");
-            member.setTeam(team);
-
+            member.setName("테스트A");
             em.persist(member);
 
-            Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
+            //item 추가
+            Item item = new Item();
+            item.setName("상품A");
+            item.setPrice(1000);
+            item.setStockQuantity(10);
+            em.persist(item);
 
-            System.out.println("findTeam = " + findTeam);
+            //추가한 멤버가 주문
+            Order order = new Order();
+            order.setMember(member);
+            em.persist(order);
+
+            //멤버가 상품A의 주문을 매핑
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            orderItem.setItem(item);
+            em.persist(orderItem);
+
 
             tx.commit();
         } catch (Exception e) {
