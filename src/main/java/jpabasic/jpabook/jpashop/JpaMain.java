@@ -24,28 +24,19 @@ public class JpaMain {
 
         try {
 
-            //멤버 추가
-            Member member = new Member();
-            member.setName("테스트A");
-            em.persist(member);
+            Book book = new Book();
+            book.setName("로마법수업");
+            book.setPrice(1000);
 
-            //item 추가
-            Item item = new Item();
-            item.setName("상품A");
-            item.setPrice(1000);
-            item.setStockQuantity(10);
-            em.persist(item);
+            em.persist(book);
 
-            //추가한 멤버가 주문
-            Order order = new Order();
-            order.setMember(member);
-            em.persist(order);
+            em.flush();
+            em.clear();
 
-            //멤버가 상품A의 주문을 매핑
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-            orderItem.setItem(item);
-            em.persist(orderItem);
+
+            Book book1 = em.find(Book.class, book.getId());
+
+            System.out.println("book1 = " + book1);
 
 
             tx.commit();

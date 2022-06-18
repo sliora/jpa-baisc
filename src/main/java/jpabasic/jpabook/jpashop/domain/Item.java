@@ -2,13 +2,12 @@ package jpabasic.jpabook.jpashop.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 public class Item {
 
     @Id @GeneratedValue
@@ -17,5 +16,4 @@ public class Item {
 
     private String name;
     private int price;
-    private int stockQuantity;
 }
