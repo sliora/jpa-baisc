@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class JpaMain {
@@ -27,6 +28,8 @@ public class JpaMain {
             Book book = new Book();
             book.setName("로마법수업");
             book.setPrice(1000);
+            book.setCreatedBy("kim");
+            book.setCreatedDate(LocalDateTime.now());
 
             em.persist(book);
 
