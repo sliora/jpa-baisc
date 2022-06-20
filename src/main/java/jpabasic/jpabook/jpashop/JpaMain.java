@@ -24,7 +24,7 @@ public class JpaMain {
 
         try {
 
-            //멤버 추가
+/*            //멤버 추가
             Member member = new Member();
             member.setName("테스트A");
             em.persist(member);
@@ -45,7 +45,11 @@ public class JpaMain {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
             orderItem.setItem(item);
-            em.persist(orderItem);
+            em.persist(orderItem);*/
+
+/*
+            Member member = em.find(Member.class, 1);
+            System.out.println("member.getName() = " + member.getName());*/
 
 
             tx.commit();
