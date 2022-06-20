@@ -16,10 +16,13 @@
             jpabasic.jpabook.jpashop.domain.Item
         </class>
         <class>
-            jpabasic.jpabook.jpashop.domain.Category
+            jpabasic.jpabook.jpashop.domain.Movie
         </class>
         <class>
-            jpabasic.jpabook.jpashop.domain.Delivery
+            jpabasic.jpabook.jpashop.domain.Album
+        </class>
+        <class>
+            jpabasic.jpabook.jpashop.domain.Book
         </class>
         <properties>
             <!-- 필수 속성 -->
@@ -33,7 +36,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 </persistence>
