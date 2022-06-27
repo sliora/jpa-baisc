@@ -25,6 +25,19 @@ public class JpaMain {
 
         try {
 
+            Address address = new Address("city", "street", "10000");
+
+            Member member1 = new Member();
+            member1.setName("MemberA");
+            member1.setAddress(address);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setName("MemberB");
+            member2.setAddress(address);
+            em.persist(member2);
+
+            member1.getAddress().setCity("newCity");  //member1의 Address 를 변환했으나.. 모두 바뀜
 
             tx.commit();
         } catch (Exception e) {
