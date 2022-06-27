@@ -13,11 +13,13 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Period period;
+
+    @Embedded
+    private Address address;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();

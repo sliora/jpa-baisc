@@ -24,24 +24,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            /*Book book = new Book();
-            book.setName("라틴어수업");
-            book.setPrice(1000);
-            book.setCreatedBy("kim");
-            book.setCreatedDate(LocalDateTime.now());
 
-            em.persist(book);
-
-            em.flush();
-            em.clear();
-*/
-            Book reference = em.getReference(Book.class,1L);
-            System.out.println("reference.getClass() = " + reference.getClass());
-            System.out.println("reference.getName() = " + reference.getName());
-
-            em.detach(reference);
-
-            System.out.println("reference.getName() = " + reference.getName());
 
             tx.commit();
         } catch (Exception e) {
