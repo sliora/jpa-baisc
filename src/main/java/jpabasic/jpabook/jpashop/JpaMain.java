@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootApplication
 public class JpaMain {
@@ -25,19 +26,12 @@ public class JpaMain {
 
         try {
 
-            Address address = new Address("city", "street", "10000");
-
-            Member member1 = new Member();
-            member1.setName("MemberA");
-            member1.setAddress(address);
-            em.persist(member1);
-
-            Member member2 = new Member();
-            member2.setName("MemberB");
-            member2.setAddress(address);
-            em.persist(member2);
-
-            member1.getAddress().setCity("newCity");  //member1의 Address 를 변환했으나.. 모두 바뀜
+            List<Member> resultList = em.createQuery(
+                    "select m from Member m where m.name like '%kim%'",
+                            Member.class).getResultList();
+            for (Member member : resultList) {
+                System.out.println("member = " + member);
+            }
 
             tx.commit();
         } catch (Exception e) {
