@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,12 +29,13 @@ public class JpaMain {
 
         try {
 
-            List<Member> resultList = em.createQuery(
-                    "select m from Member m where m.name like '%kim%'",
-                            Member.class).getResultList();
-            for (Member member : resultList) {
-                System.out.println("member = " + member);
-            }
+            //Criteria 사용 준비
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+
+            Root<Member> m = query.from(Member.class);
+            CriteriaQuery<Member> criteriaQuery = query.select(m).where(cb.equal(m.get("name"), "kim"));
+            em.createQuery(criteriaQuery).getResultList();
 
             tx.commit();
         } catch (Exception e) {
