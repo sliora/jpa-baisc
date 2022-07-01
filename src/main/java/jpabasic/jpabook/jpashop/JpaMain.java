@@ -28,14 +28,25 @@ public class JpaMain {
         tx.begin();
 
         try {
+            for (int i = 0; i < 100; i++) {
+                Member member = new Member();
+                member.setName("member" + i);
+                member.setAddress(new Address("city", "street", "10000"));
+                em.persist(member);
+            }
 
-            //Criteria 사용 준비
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+            em.flush();
+            em.clear();
 
-            Root<Member> m = query.from(Member.class);
-            CriteriaQuery<Member> criteriaQuery = query.select(m).where(cb.equal(m.get("name"), "kim"));
-            em.createQuery(criteriaQuery).getResultList();
+            List<Member> resultList = em.createQuery("select m from Member m order by m.name desc", Member.class)
+                    .setFirstResult(1)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            System.out.println("resultList.size() = " + resultList.size());
+            for (Member member1 : resultList) {
+                System.out.println("member1 = " + member1);
+            }
 
             tx.commit();
         } catch (Exception e) {
