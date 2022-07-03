@@ -28,24 +28,31 @@ public class JpaMain {
         tx.begin();
 
         try {
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setName("member" + i);
-                member.setAddress(new Address("city", "street", "10000"));
-                em.persist(member);
-            }
+            Member member = new Member();
+            member.setName("member");
+            member.setAddress(new Address("city", "street", "10000"));
+            em.persist(member);
+
+            Order order = new Order();
+            order.setMember(member);
+            order.setStatus(OrderStatus.ORDER);
+            em.persist(order);
 
             em.flush();
             em.clear();
 
-            List<Member> resultList = em.createQuery("select m from Member m order by m.name desc", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(10)
+            String query = "select m.status, 'HELLO', true from Order m where m.status = :orderStatus";
+
+
+            List<Object[]> resultList = em.createQuery(query)
+                    .setParameter("orderStatus", OrderStatus.ORDER)
                     .getResultList();
 
             System.out.println("resultList.size() = " + resultList.size());
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1);
+            for (Object[] objects : resultList) {
+                System.out.println("objects[0] = " + objects[0]);
+                System.out.println("objects[0] = " + objects[1]);
+                System.out.println("objects[0] = " + objects[2]);
             }
 
             tx.commit();
