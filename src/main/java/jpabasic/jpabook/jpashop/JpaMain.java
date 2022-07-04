@@ -41,7 +41,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.status, 'HELLO', true from Order m where m.status = :orderStatus";
+            String query = "select m.status, 'HELLO', true from Order m join fetch OrderItem t" +
+                           " where m.status = :orderStatus";
 
 
             List<Object[]> resultList = em.createQuery(query)
