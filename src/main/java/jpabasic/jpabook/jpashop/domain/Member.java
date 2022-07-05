@@ -8,6 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.name = :username"
+)
 public class Member {
 
     @Id @GeneratedValue
