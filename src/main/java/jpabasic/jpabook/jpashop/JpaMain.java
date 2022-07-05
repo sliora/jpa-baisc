@@ -1,11 +1,18 @@
 package jpabasic.jpabook.jpashop;
 
-import jpabasic.jpabook.jpashop.domain.Address;
-import jpabasic.jpabook.jpashop.domain.Member;
+import jpabasic.jpabook.jpashop.domain.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
